@@ -6,9 +6,27 @@ var kColorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 245, 162, 254),
 );
 
+var kDarkColorScheme = ColorScheme.fromSeed(
+  brightness: Brightness.dark,
+  seedColor: const Color.fromARGB(255, 214, 0, 237),
+);
 void main() {
   runApp(
     MaterialApp(
+        darkTheme: ThemeData.dark().copyWith(
+          useMaterial3: true,
+          colorScheme: kDarkColorScheme,
+          cardTheme: const CardTheme().copyWith(
+            color: kDarkColorScheme.secondaryContainer,
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            //elevated button doesnt have copywith function
+            style: ElevatedButton.styleFrom(
+                backgroundColor: kDarkColorScheme.primaryContainer,
+                foregroundColor: kDarkColorScheme.onPrimaryContainer),
+          ),
+        ),
         theme: ThemeData().copyWith(
           useMaterial3: true,
           colorScheme: kColorScheme,
@@ -17,8 +35,9 @@ void main() {
             foregroundColor: kColorScheme.primaryContainer,
           ),
           cardTheme: const CardTheme().copyWith(
-              color: kColorScheme.secondaryContainer,
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8)),
+            color: kColorScheme.secondaryContainer,
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             //elevated button doesnt have copywith function
             style: ElevatedButton.styleFrom(
@@ -34,7 +53,7 @@ void main() {
               ),
         ),
         // For using versions of materialApp
-
+        // themeMode: ThemeMode.system, default
         home: const Expenses()),
   );
 }
